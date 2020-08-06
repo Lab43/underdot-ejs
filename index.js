@@ -1,13 +1,27 @@
-const ejs = require('ejs');
+const ejs = require('ejs')
+    , p = require('path')
+;
 
 
 
 module.exports = (config = {}) => (plugin) => {
 
-  const {ext = 'ejs', ...options} = config;
+  const {ext = 'ejs', views = [], ...options} = config;
+
+  // tell ejs the root directory so includes with absolute paths can be resolved
+  if (!options.root) options.root = plugin.source;
 
   plugin.registerRenderer(ext, (template, metadata, templateHelpers) => {
-    return ejs.render(template, {...metadata, ...templateHelpers}, options);
+
+    // add the current files directory to the views array so that includes with relative paths can be resolve
+    const allViews = views.concat([p.join(plugin.source, p.dirname(metadata.filePath))]);
+
+    return ejs.render(
+      template,
+      {...metadata, ...templateHelpers},
+      {views: allViews, ...options},
+    );
+
   });
 
 }
