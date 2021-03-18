@@ -1,9 +1,9 @@
 {
   "name": "underdot-ejs",
   "version": "1.0.0",
-  "description": "",
+  "description": "EJS template renderer for Underdot",
   "main": "index.js",
-  "author": "",
+  "author": "Cameron Spencer <cameron@lab43.com> (https://www.lab43.com)",
   "license": "ISC",
   "dependencies": {
     "ejs": "^3.1.3"

@@ -13,7 +13,7 @@ module.exports = (config = {}) => (plugin) => {
 
   plugin.registerRenderer(ext, (template, metadata, templateHelpers) => {
 
-    // add the current files directory to the views array so that includes with relative paths can be resolve
+    // add the current files directory to the views array so that includes with relative paths can be resolved
     const allViews = views.concat([p.join(plugin.source, metadata.dirname)]);
 
     return ejs.render(
